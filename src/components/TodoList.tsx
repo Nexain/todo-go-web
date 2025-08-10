@@ -3,12 +3,18 @@ import { useEffect, useState } from "react";
 import { getTodos } from "@/lib/api";
 import TodoItem from "./TodoItem";
 
+interface Todo {
+  id: number;
+  task: string;
+  completed: boolean;
+}
+
 export default function TodoList() {
-  const [todos, setTodos] = useState<any[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
 
   const loadTodos = async () => {
     try {
-      const data = await getTodos();
+      const data: Todo[] = await getTodos();
       setTodos(data);
     } catch (error) {
       console.error(error);
